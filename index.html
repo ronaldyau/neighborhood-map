@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--featuring a map of your neighborhood 
+add functionality to this map including highlighted locations, 
+third-party data about those locations 
+various ways to browse the content.-->
+
+<html>
+    <head>
+        <title>Favorite San Francisco Spots</title>
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+    </head>
+    <body class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 text-center">
+                <h1>Spots in SF</h1>
+                <select id="category" data-bind="options: categories,
+                                optionsCaption: 'Choose...',
+                                value: selectedCategory,
+                                event: { change: categoryHandler }" 
+                ></select>
+
+                <ul data-bind="foreach: filteredLocations">
+                    <li data-bind="text: title,
+                                    click: $parent.chooseMarker"></li>
+                </ul>
+            </div>
+            <div id="map" class="col-md-9"></div>
+        </div>
+        <!--TODO: Move this to app.js
+        - add styles
+        -->
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+        <script src="js/app.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyBujIvX5fnWq0Fg66j57-krEICEos7IoAw&v=3&callback=initMap"></script>
+  </body>
+</html>
