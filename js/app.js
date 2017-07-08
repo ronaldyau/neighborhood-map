@@ -7,7 +7,7 @@ function initMap() {
             {title: 'Lers Ros Thai', category: 'food', location: {lat: 37.7847091, lng: -122.4175909}, fs: '4ebd985c6c257f09ae0c188e'},
             {title: 'Domo Sushi', category: 'food', location: {lat: 37.77603201110472, lng: -122.42610991001129}, fs: '49ce86fff964a520515a1fe3'},
             {title: 'Bi-Rite Creamery', category: 'food', location: {lat: 37.76146792837773, lng: -122.42573583842787}, fs: '45eaff58f964a5208e431fe3'},
-            {title: 'Twin Peaks', category: 'food', category: 'fun', location: {lat: 37.76146792837773, lng: -122.44628977859259}, fs: '51ca3ecb7dd206231217f8bf'},
+            {title: 'Twin Peaks', category: 'fun', location: {lat: 37.76146792837773, lng: -122.44628977859259}, fs: '51ca3ecb7dd206231217f8bf'},
             {title: 'Mission Dolores Park', category: 'fun', location: {lat: 37.759754783810415, lng: -122.42745573335124}, fs: '4ab595e1f964a520877520e3'},
             {title: 'Little Skillet', category: 'food', location: {lat: 37.778835884569475, lng: -122.39402057443735}, fs: '4a0c561df964a52022751fe3'},
             {title: 'El Techo', category: 'bar', location: {lat: 37.756699, lng: -122.418971}, fs: '51896b72498e1bcc776ddaa8'},
@@ -62,9 +62,9 @@ function initMap() {
         },
         chooseMarker: function() {
             this.marker.setAnimation(google.maps.Animation.BOUNCE);
-            populateInfoWindow(this.marker, largeInfowindow)
+            populateInfoWindow(this.marker, largeInfowindow);
         }
-    }
+    };
 
     viewModel.filteredLocations = ko.dependentObservable(function() {
         var filter = this.selectedCategory();
