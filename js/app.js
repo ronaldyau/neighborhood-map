@@ -61,8 +61,12 @@ function initMap() {
             showSpots(this.selectedCategory());
         },
         chooseMarker: function() {
-            this.marker.setAnimation(google.maps.Animation.BOUNCE);
-            populateInfoWindow(this.marker, largeInfowindow);
+            var marker = this.marker;
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+            window.setTimeout(function() {
+                marker.setAnimation(null);
+            }, 750);
+            populateInfoWindow(marker, largeInfowindow);
         }
     };
 
@@ -113,7 +117,9 @@ function initMap() {
                     '<p class="infoWindow-detail">Checkins: ' + venue.stats.checkinsCount + '</p>'
                 );
                 infowindow.open(map, marker);
-            });
+            }).error(function(e) {
+                infowindow.setContent('<p>Unable to retrieve information from Foursquare.</p>')
+            });;
         }
     }
 
@@ -145,6 +151,10 @@ function initMap() {
         }
         map.fitBounds(bounds);
     }                
+}
+
+function handleGoogleMapsError() {
+	alert("There was an issue loading Google Maps. Please try refreshing the browser.");
 }
 
 

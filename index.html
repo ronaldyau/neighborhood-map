@@ -6,9 +6,10 @@ various ways to browse the content.-->
 
 <html>
     <head>
-        <title>Favorite San Francisco Spots</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/style.css">
+        <title>Favorite San Francisco Spots</title>
     </head>
     <body class="container-fluid">
         <div class="row">
@@ -34,6 +35,6 @@ various ways to browse the content.-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
         <script src="js/app.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyBujIvX5fnWq0Fg66j57-krEICEos7IoAw&v=3&callback=initMap"></script>
+        <script async deferred src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyBujIvX5fnWq0Fg66j57-krEICEos7IoAw&v=3&callback=initMap" onerror="handleGoogleMapsError()"></script>
   </body>
 </html>
