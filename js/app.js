@@ -31,6 +31,7 @@ function initMap() {
         clientId = 'HMBUAO54USWN0OPZ0NHIN4OH40FHWR5ZEVZC11K2DUXTKJ4L',
         clientSecret = 'BMDPRVH5ANGIWH1QBKWKRXCNYYRVLVQVWFTXQ33TQZBAJCRA',
         venuesAPI = 'https://api.foursquare.com/v2/venues/';
+        cache = {}
 
     for (var i = 0; i < locations.length; i++) {
         var position = locations[i].location;
@@ -106,20 +107,21 @@ function initMap() {
             });
 
             var url = venuesAPI + marker.fs + '?client_id=' + clientId + '&client_secret=' + clientSecret + '&v=20170706';
-
-            $.getJSON(url, function(data) {
-                var venue = data.response.venue;
-                var imgSrc = venue.bestPhoto.prefix + '100x100' + venue.bestPhoto.suffix;
-                infowindow.setContent('<img class="infoWindow-image" src="' + imgSrc + '">' + 
-                    '<p class="infoWindow-title">' + venue.name + '</p>' +
-                    '<p class="infoWindow-detail infoWindow-subtitle">Foursquare Stats</p>' + 
-                    '<p class="infoWindow-detail">Rating: ' + venue.rating + '</p>' + 
-                    '<p class="infoWindow-detail">Checkins: ' + venue.stats.checkinsCount + '</p>'
-                );
-                infowindow.open(map, marker);
-            }).fail(function(e) {
-                infowindow.setContent('<p>Unable to retrieve information from Foursquare.</p>');
-            });
+            if (cache[url]) {
+                setInfoWindow(cache[url], infowindow);
+                infowindow.open(map, marker);                
+            } else {
+                $.getJSON(url, function(data) {
+                    setInfoWindow(data.response.venue, infowindow);
+                    cache[url] = data.response.venue;
+                })
+                .fail(function(e) {
+                    infowindow.setContent('<p>Unable to retrieve information from Foursquare.</p>');
+                })
+                .always(function() {
+                    infowindow.open(map, marker);
+                });
+            }
         }
     }
 
@@ -151,6 +153,17 @@ function initMap() {
         }
         map.fitBounds(bounds);
     }                
+
+    function setInfoWindow(venue, infowindow) {
+        var imgSrc = venue.bestPhoto.prefix + '100x100' + venue.bestPhoto.suffix;
+        venue.rating = venue.rating || 'None';
+        infowindow.setContent('<img class="infoWindow-image" src="' + imgSrc + '">' + 
+            '<p class="infoWindow-title">' + venue.name + '</p>' +
+            '<p class="infoWindow-detail infoWindow-subtitle">Foursquare Stats</p>' + 
+            '<p class="infoWindow-detail">Rating: ' + venue.rating + '</p>' + 
+            '<p class="infoWindow-detail">Checkins: ' + venue.stats.checkinsCount + '</p>'
+        );
+    }
 }
 
 function handleGoogleMapsError() {
