@@ -30,8 +30,8 @@ function initMap() {
         }),
         clientId = 'HMBUAO54USWN0OPZ0NHIN4OH40FHWR5ZEVZC11K2DUXTKJ4L',
         clientSecret = 'BMDPRVH5ANGIWH1QBKWKRXCNYYRVLVQVWFTXQ33TQZBAJCRA',
-        venuesAPI = 'https://api.foursquare.com/v2/venues/';
-        cache = {}
+        venuesAPI = 'https://api.foursquare.com/v2/venues/',
+        cache = {};
 
     for (var i = 0; i < locations.length; i++) {
         var position = locations[i].location;
