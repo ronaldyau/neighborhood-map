@@ -118,8 +118,8 @@ function initMap() {
                 );
                 infowindow.open(map, marker);
             }).error(function(e) {
-                infowindow.setContent('<p>Unable to retrieve information from Foursquare.</p>')
-            });;
+                infowindow.setContent('<p>Unable to retrieve information from Foursquare.</p>');
+            });
         }
     }
 
