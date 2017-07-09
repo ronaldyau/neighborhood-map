@@ -117,7 +117,7 @@ function initMap() {
                     '<p class="infoWindow-detail">Checkins: ' + venue.stats.checkinsCount + '</p>'
                 );
                 infowindow.open(map, marker);
-            }).error(function(e) {
+            }).fail(function(e) {
                 infowindow.setContent('<p>Unable to retrieve information from Foursquare.</p>');
             });
         }
